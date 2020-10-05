@@ -8,8 +8,9 @@ import subprocess
 import random
 import time
 
-# 百度ip
-ipTest = '61.135.169.121'
+# 百度ip, http ip
+BaiduIP = '61.135.169.121'
+BaiduIP2 = '182.61.200.7'
 # 可以切换的wifi
 wifiList = ['Tenda_D05B41', 'Tenda_D05B40', 'Tenda_D05B42']
 
@@ -55,7 +56,7 @@ def main():
         current_wifi = get_current_wifi()
         print("当前的wifi为：", current_wifi)
         t = time.time()
-        if check_ping(ipTest, 2) != 'ok':
+        if check_ping(BaiduIP, 2) != 'ok':
             print(get_time(), " - 联网失败，正在切换wifi: ", current_wifi)
             if auto_switch_wifi(wifiList) == 'ok':
                 print("切换成功")
