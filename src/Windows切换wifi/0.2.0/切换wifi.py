@@ -1,8 +1,7 @@
 """
 Windows自动切换WiFi v0.1.2
     原始代码来自于: https://blog.csdn.net/qq_34377830/article/details/82497457
-更新中...
-优化结构
+重构ing...
 """
 import os
 import subprocess
@@ -10,8 +9,8 @@ import random
 import time
 
 # 百度ip
-BaiduIP = '61.135.169.121'
-BaiduIP2 = '182.61.200.7'
+BaiduIP = ['61.135.169.121', '182.61.200.7']
+
 # 可以切换的wifi列表
 wifiList = ['Tenda_D05B40', 'Tenda_D05B41', 'Tenda_D05B42']
 
@@ -21,9 +20,9 @@ def get_time():
     return time.strftime("%Y/%m/%d %H:%M:%S", time.localtime())
 
 
-# wifi列表中排除当前连接的wifi
-def wifi_del(wifi_list, wifi):
-    print()
+# 控制台日志
+def log(msg):
+    print(get_time(), msg)
 
 
 # 获取当前wifi

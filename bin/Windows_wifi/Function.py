@@ -1,9 +1,3 @@
-"""
-Windows自动切换WiFi v0.1.2
-    原始代码来自于: https://blog.csdn.net/qq_34377830/article/details/82497457
-更新中...
-优化结构
-"""
 import os
 import subprocess
 import random
@@ -51,24 +45,4 @@ def auto_switch_wifi(wifi):
     # wifi = random.choice(wifi_list)  # 从wifi列表中随机选择一个wifi
     cmd = 'netsh wlan connect name={}'.format(wifi)
     res = os.system(cmd)
-    if res == 0:
-        print("切换成功")
     return 'ok' if res == 0 else 'failed'
-
-
-def main():
-    while True:
-        print("当前的wifi为：", get_current_wifi())  # 获取当前连接wifi
-        if check_ping(BaiduIP, 2) == 'ok':  # ping百度ip能否ping通
-            wifi = random.choice(wifiList)  # 从wifi列表中随机选择一个wifi
-            print(get_time(), " - 联网失败，正在切换wifi: ", wifi)
-            if auto_switch_wifi(wifi) != 'ok':
-                continue
-        else:
-            print(get_time(), " - 可以成功联网")
-        print('-' * 60)
-        time.sleep(10)
-
-
-if __name__ == "__main__":
-    main()
