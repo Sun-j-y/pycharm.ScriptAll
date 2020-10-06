@@ -1,9 +1,8 @@
 """
-Windows自动切换WiFi v0.1.1
+Windows自动切换WiFi v0.1.2
     原始代码来自于: https://blog.csdn.net/qq_34377830/article/details/82497457
 更新中...
-增加了一些注释
-一些结构优化
+
 """
 import os
 import subprocess

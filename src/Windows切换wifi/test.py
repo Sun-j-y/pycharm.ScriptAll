@@ -15,11 +15,13 @@ p = subprocess.Popen(cmd,
                      stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE,
                      shell=True)
+print(p)
 ret = p.stdout.read()
+print(ret)
 index = ret.decode(encoding='unicode_escape').split(':')
 
 t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-print(t)
+
 
 """
 while True:
