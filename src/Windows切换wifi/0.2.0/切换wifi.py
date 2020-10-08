@@ -2,7 +2,9 @@
 Windows自动切换WiFi v0.1.2
     原始代码来自于: https://blog.csdn.net/qq_34377830/article/details/82497457
 重构ing...
+时间精确到毫秒
 """
+import datetime
 import os
 import subprocess
 import random
@@ -17,12 +19,12 @@ wifiList = ['Tenda_D05B40', 'Tenda_D05B41', 'Tenda_D05B42']
 
 # 获取当前时间
 def get_time():
-    return time.strftime("%Y/%m/%d %H:%M:%S", time.localtime())
+    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S:%f')[:-3]
 
 
 # 控制台日志
 def log(msg):
-    print(get_time(), msg)
+    print(get_time(), ' - ', msg)
 
 
 # 获取当前wifi
@@ -58,13 +60,14 @@ def auto_switch_wifi(wifi):
 def main():
     while True:
         print("当前的wifi为：", get_current_wifi())  # 获取当前连接wifi
+        random.choice(BaiduIP)
         if check_ping(BaiduIP, 2) == 'ok':  # ping百度ip能否ping通
             wifi = random.choice(wifiList)  # 从wifi列表中随机选择一个wifi
-            print(get_time(), " - 联网失败，正在切换wifi: ", wifi)
+            log("联网失败, 正在切换wifi: " + wifi)
             if auto_switch_wifi(wifi) != 'ok':
                 continue
         else:
-            print(get_time(), " - 可以成功联网")
+            log("可以成功联网")
         print('-' * 60)
         time.sleep(10)
 
