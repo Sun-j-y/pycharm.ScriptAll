@@ -1,8 +1,6 @@
 """
-Windows自动切换WiFi v0.2.0
-    原始代码来自于: https://blog.csdn.net/qq_34377830/article/details/82497457
-重构ing...
-时间精确到毫秒
+Windows自动切换WiFi v0.2.1
+
 """
 import datetime
 import os
@@ -20,12 +18,22 @@ wifiList = ['Tenda_D05B40', 'Tenda_D05B41', 'Tenda_D05B42']
 # 控制台日志
 def log(msg):
     # print("\033[32m" + get_time() + "\033[0m", ' - ', msg)
-    print(get_time(), ' - ', msg)
+    print("\033[32m" + get_time() + "\033[0m", ' - ', msg)
+
+
+# log()重载 打印特定颜色的日志
+def log(msg, color):
+    if color == 'RED':
+        print("", msg)
 
 
 # 获取当前时间
 def get_time():
-    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S:%f')[:-3]
+    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+
+# def get_time(format):
+#     return datetime.datetime.now().strftime(format)[:-3]
 
 
 # 获取当前wifi
