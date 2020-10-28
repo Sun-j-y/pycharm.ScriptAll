@@ -2,6 +2,7 @@
 Windows自动切换WiFi v0.2.1
 
 - 日志优化
+- 结构优化
 """
 import datetime
 import os
@@ -9,11 +10,15 @@ import subprocess
 import random
 import time
 
-# 百度ip
-BaiduIP = ['61.135.169.121', '182.61.200.7']
-
 # 可以切换的wifi列表
-wifiList = ['Tenda_D05B40', 'Tenda_D05B41', 'Tenda_D05B42']
+wifiList = [
+    'Tenda_D05B40',
+    'Tenda_D05B41',
+    'Tenda_D05B42'
+]
+
+# 当前连接的wifi
+current_wifi = ""
 
 
 # 获取当前时间
@@ -21,7 +26,7 @@ def get_time():
     return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 
-# 获取当前日期
+# 获取当前日期 用于生成日志文件名称
 def get_day():
     return datetime.datetime.now().strftime('%Y.%m.%d')
 
@@ -45,7 +50,8 @@ def get_current_wifi():
     ret = p.stdout.read()
     index = ret.decode(encoding='unicode_escape').find("SSID")
     if index > 0:  # 获取到 SSID , 将SSID的值剪切出来
-        return ret[index:].decode(encoding='unicode_escape').split(':')[1].split('\r\n')[0].strip()
+        current_wifi = ret[index:].decode(encoding='unicode_escape').split(':')[1].split('\r\n')[0].strip()
+        return current_wifi
     else:
         return None
 
@@ -67,8 +73,7 @@ def auto_switch_wifi(wifi):
     log("执行命令: " + cmd, 'true')
     # log("执行: " + "\033[31m" + cmd + "\033[0m")
     res = os.system(cmd)
-    if check_ping(random.choice(BaiduIP), 2) != 'ok':
-        # time.sleep(0.5)
+    if check_ping("baidu.com", 2) != 'ok':
         log("可以正常联网, 当前wifi为: " + str(get_current_wifi()), 'false')
         print('-' * 70)
     return 'ok' if res == 0 else 'failed'
@@ -77,7 +82,7 @@ def auto_switch_wifi(wifi):
 def main():
     log("程序开始, 当前wifi为: " + str(get_current_wifi()), "true")
     while True:
-        if check_ping(random.choice(BaiduIP), 2) != 'ok':  # 测试能否ping通
+        if check_ping("baidu.com", 2) != 'ok':  # 测试能否ping通
             wifi = random.choice(wifiList)  # 从wifi列表中随机选择一个wifi
             log("联网失败, 正在切换wifi: " + wifi, 'true')
             if auto_switch_wifi(wifi) != 'ok':
@@ -86,8 +91,9 @@ def main():
 
 
 def test():
-    check_ping(random.choice(BaiduIP), 2)
+    print(get_current_wifi())
 
 
 if __name__ == "__main__":
-    main()
+    test()
+    print(current_wifi)

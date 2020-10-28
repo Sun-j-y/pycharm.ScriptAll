@@ -4,6 +4,7 @@ import subprocess
 
 import time
 
-print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')[:-3])
-
-
+# print(str(os.walk(u'D:\\test')))
+# print("目录为: %s" % os.listdir(os.getcwd("D:\\")))
+print(os.removedirs("D:\\Test\\"))
+# open("D:\Test\\*.txt", "a")
