@@ -1,4 +1,4 @@
-import include.log
+import include.log as Log
 
-include.log.hi2()
+Log.hi2()
 
