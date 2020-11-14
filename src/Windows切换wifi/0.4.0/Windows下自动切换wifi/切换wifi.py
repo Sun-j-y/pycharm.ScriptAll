@@ -1,8 +1,9 @@
 """
 Windows自动切换WiFi v0.4.0
     此脚本仅适用于Windows环境下 python
+    可连接wifi列表应为已保存并且再当前位置可连接得到的wifi的SSID
 
-- 日志优化 去除大量无用日志
+- 日志简化 去除大量无用日志
 """
 import datetime
 import os
