@@ -10,6 +10,8 @@ import time
 
 import requests
 
+powershell_cmd = "curl -URi 'http://172.168.254.6:801/eportal/?c=ACSetting&a=Login&protocol=http:&hostname=172.168.254.6&iTermType=2&wlanuserip=172.19.192.251&wlanacip=172.168.254.100&mac=000000000000&ip=172.19.192.251&enAdvert=0&loginMethod=1' -Body 'DDDDD=%2C0%2C18031210211%40yidong&upass=888888&R1=0&R2=0&R6=0&para=00&0MKKey=123456&buttonClicked=&redirect_url=&err_flag=&username=&password=&user=&cmd=&Login=' -Method Post"
+
 RequestURL = 'http://172.168.254.6:801/eportal/?c=ACSetting&a=Login&protocol=http:&hostname=172.168.254.6&iTermType=1&wlanuserip=172.19.219.87&wlanacip=172.168.254.100&mac=000000000000&ip=172.19.65.99&enAdvert=0&loginMethod=1'
 # 此处根据自己校园网Form Data中发送的数据进行更改
 action = 'login'
@@ -27,8 +29,10 @@ post_data = {
     '0MKKey': '123456',
 
 }
-"DDDDD=%2C0%2C学号%40运营商&upass=密码&R1=0&R2=0&R6=0&para=00&0MKKey=123456&buttonClicked=&redirect_url=&err_flag=&username=&password=&user=&cmd=&Login="
-url = "http://172.168.254.6:801/eportal/?c=ACSetting&a=Login&protocol=http:&hostname=172.168.254.6&iTermType=2&wlanuserip=${newip}&wlanacip=172.168.254.100&mac=000000000000&ip=${newip}&enAdvert=0&loginMethod=1"
+#      "DDDDD=%2C0%2C学号%40运营商&upass=密码&R1=0&R2=0&R6=0&para=00&0MKKey=123456&buttonClicked=&redirect_url=&err_flag=&username=&password=&user=&cmd=&Login="
+data = "DDDDD=%2C0%2C18031210211%40yidong&upass=888888&R1=0&R2=0&R6=0&para=00&0MKKey=123456&buttonClicked=&redirect_url=&err_flag=&username=&password=&user=&cmd=&Login="
+#      http://172.168.254.6:801/eportal/?c=ACSetting&a=Login&protocol=http:&hostname=172.168.254.6&iTermType=1&wlanuserip=${本地ip}&wlanacip=172.168.254.100&mac=000000000000&ip=${本地ip}&enAdvert=0&loginMethod=1
+url = "http://172.168.254.6:801/eportal/?c=ACSetting&a=Login&protocol=http:&hostname=172.168.254.6&iTermType=2&wlanuserip=172.19.192.251&wlanacip=172.168.254.100&mac=000000000000&ip=172.19.192.251&enAdvert=0&loginMethod=1"
 request_headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
     'Accept-Encoding': 'gzip, deflate',
@@ -112,11 +116,11 @@ if check_ping(EduIP) == 'ok':  # 能ping通校园网
     while True:
         print("login...")
         if check_ping(BaiduIP) == 'failed':  # ping不通百度 登陆校园网
-            requests.post(url, data=form_data, headers=request_headers)
+            requests.post(url, data=data)
             time.sleep(1)  # 休眠
-            if check_ping(BaiduIP) == 'ok':
-                print("已连上网络")
-                break
+        if check_ping(BaiduIP) == 'ok':
+            print("已连上网络")
+            break
         time.sleep(1)  # 休眠
 else:
     print("未连接校园网...")
