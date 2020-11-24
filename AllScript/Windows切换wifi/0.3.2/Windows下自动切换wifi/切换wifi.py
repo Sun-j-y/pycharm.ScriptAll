@@ -12,8 +12,7 @@ import time
 
 import sys
 
-sys.path.append(r"D:\Works\PyCharm\ScriptAll\src\Windows切换wifi\0.3.2\Windows下自动切换wifi")
-
+sys.path.append(r"/AllScript\Windows切换wifi\0.3.2\Windows下自动切换wifi")
 
 # 可以切换的wifi列表
 wifiList = [
@@ -108,8 +107,16 @@ def main():
 
 
 def test():
-    print(exec_cmd("netsh wlan connect name=Tenda_D05B40"))
+    file_list = [
+        "D:/Test/test1.txt",
+        "D:/Test/test2.txt",
+        "D:/Test/test3.txt",
+        "D:/Test/test4.txt",
+        "D:/Test/test5.txt",
+        "D:/Test/test6.txt",
+        "D:/Test/test7.txt",
+    ]
 
 
 if __name__ == "__main__":
-    main()
+        main()
