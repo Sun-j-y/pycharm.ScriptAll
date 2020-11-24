@@ -10,29 +10,21 @@ import time
 
 import requests
 
+# 运营商
+移动 = 'yidong'
+联通 = 'unicom'
+电信 = 'telecom'
+# 选择运营商
+yunyingshang = 移动
+
+# 学号姓名
+username = 18031210211
+password = 888888
+
 powershell_cmd = "curl -URi 'http://172.168.254.6:801/eportal/?c=ACSetting&a=Login&protocol=http:&hostname=172.168.254.6&iTermType=2&wlanuserip=172.19.192.251&wlanacip=172.168.254.100&mac=000000000000&ip=172.19.192.251&enAdvert=0&loginMethod=1' -Body 'DDDDD=%2C0%2C18031210211%40yidong&upass=888888&R1=0&R2=0&R6=0&para=00&0MKKey=123456&buttonClicked=&redirect_url=&err_flag=&username=&password=&user=&cmd=&Login=' -Method Post"
 
 RequestURL = 'http://172.168.254.6:801/eportal/?c=ACSetting&a=Login&protocol=http:&hostname=172.168.254.6&iTermType=1&wlanuserip=172.19.219.87&wlanacip=172.168.254.100&mac=000000000000&ip=172.19.65.99&enAdvert=0&loginMethod=1'
-# 此处根据自己校园网Form Data中发送的数据进行更改
-action = 'login'
-username = '用户名'
-password = '密码'
-ac_id = '1'
-user_ip = '127.131.1.1'
-post_data = {
-    'DDDDD': '%2C0%2C18031210211%40yidong',
-    'upass': '888888',
-    'R1': '0',
-    'R2': '0',
-    'R6': '0',
-    'para': '00',
-    '0MKKey': '123456',
 
-}
-#      "DDDDD=%2C0%2C学号%40运营商&upass=密码&R1=0&R2=0&R6=0&para=00&0MKKey=123456&buttonClicked=&redirect_url=&err_flag=&username=&password=&user=&cmd=&Login="
-data = "DDDDD=%2C0%2C18031210211%40yidong&upass=888888&R1=0&R2=0&R6=0&para=00&0MKKey=123456&buttonClicked=&redirect_url=&err_flag=&username=&password=&user=&cmd=&Login="
-#      http://172.168.254.6:801/eportal/?c=ACSetting&a=Login&protocol=http:&hostname=172.168.254.6&iTermType=1&wlanuserip=${本地ip}&wlanacip=172.168.254.100&mac=000000000000&ip=${本地ip}&enAdvert=0&loginMethod=1
-url = "http://172.168.254.6:801/eportal/?c=ACSetting&a=Login&protocol=http:&hostname=172.168.254.6&iTermType=2&wlanuserip=172.19.192.251&wlanacip=172.168.254.100&mac=000000000000&ip=172.19.192.251&enAdvert=0&loginMethod=1"
 request_headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
     'Accept-Encoding': 'gzip, deflate',
@@ -62,8 +54,8 @@ form_data = {
     'redirect_url': '',
     'err_flag': '',
     'username': '',
-    'password': '',
     'user': '',
+    'password': '',
     'cmd': '',
     'Login': '',
 }
